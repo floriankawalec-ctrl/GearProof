@@ -1,0 +1,38 @@
+{
+  "name": "gearproof-desktop",
+  "version": "0.1.0",
+  "description": "Free and open-source hardware diagnostics for Windows",
+  "main": "electron/main.cjs",
+  "author": "Florian Kawalec",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist:windows": "electron-builder --win nsis --x64"
+  },
+  "devDependencies": {
+    "electron": "^37.2.6",
+    "electron-builder": "^26.0.12"
+  },
+  "build": {
+    "appId": "pl.gearproof.desktop",
+    "productName": "GearProof",
+    "asar": true,
+    "compression": "maximum",
+    "directories": { "output": "release", "buildResources": "assets" },
+    "files": ["electron/main.cjs", "assets/icon.ico"],
+    "win": {
+      "target": [{ "target": "nsis", "arch": ["x64"] }],
+      "icon": "assets/icon.ico",
+      "artifactName": "GearProof-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "GearProof",
+      "runAfterFinish": true
+    }
+  }
+}
